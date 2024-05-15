@@ -1,12 +1,9 @@
-import Teachers from '@/components/company/ict-blog/Teachers'
 import React from 'react'
 
-const teachersPage = () => {
+const WhyChooseUs = () => {
   return (
-    <div>
-      <Teachers /> 
-    </div>
+    <div>WhyChooseUs</div>
   )
 }
 
-export default teachersPage
+export default WhyChooseUs

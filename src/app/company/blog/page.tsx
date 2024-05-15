@@ -1,12 +1,9 @@
-import Results from '@/components/company/our-services/Results'
 import React from 'react'
 
-const resultsPage = () => {
+const blogPage = () => {
   return (
-    <div>
-      <Results />
-    </div>
+    <div>blogPage</div>
   )
 }
 
-export default resultsPage
+export default blogPage

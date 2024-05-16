@@ -97,9 +97,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-        <Link href="/">
-        <Image width={60} height={60} alt="kazibyte-logo.png" src="https://github.com/kazibyte/kazibyte/blob/main/public/kazibyte-.png?raw=true" data-hpc="true" className="Box-sc-g0xbh4-0 kzRgrI"></Image>
-        </Link>
+       
        
             </div>
            <Link href="/">

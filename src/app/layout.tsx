@@ -6,6 +6,7 @@ import Header from "@/components/headers/Header";
 import {keywordData} from '@/config/keywords/Keywords.json'
 
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -24,7 +25,7 @@ export default function RootLayout({
     <head>
 
         <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
-        <meta name="keywords" content={keywordData.map(keyword => keyword).join(',')} />
+        {/* <meta name="keywords" content={keywordData.map(keyword => keyword).join(',')} /> */}
         <title>Kazi Byte</title>
     </head>
   
@@ -33,6 +34,8 @@ export default function RootLayout({
           <Header />
        
           {children}
+
+        
    
           <Footer />
         </div>

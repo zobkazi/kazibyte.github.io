@@ -1,9 +1,12 @@
+import TermsAndService from '@/components/i&s/T&S'
 import React from 'react'
 
-const TermsOfService = () => {
+const TermsAndServicePage = () => {
   return (
-    <div>TermsOfService</div>
+    <div>
+      <TermsAndService />
+    </div>
   )
 }
 
-export default TermsOfService
+export default TermsAndServicePage

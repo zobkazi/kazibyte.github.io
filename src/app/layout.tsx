@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Welcome to Kazi Byte TM",
-  description: "KKMDM is a student-run, non-profit, student-led, and student-run organization.",
+  description: "KaziByte is a student-run, non-profit, student-led, and student-run organization.",
 };
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
     <head>
 
         <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
-        {/* <meta name="keywords" content={keywordData.map(keyword => keyword).join(',')} /> */}
+        <meta name="keywords" content={keywordData.map(keyword => keyword).join(',')} />
         <title>Kazi Byte</title>
     </head>
   

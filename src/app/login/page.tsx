@@ -1,10 +1,11 @@
-import Login from '@/components/auth/login/Login'
+
 import React from 'react'
+import SignInWithGoogle from './SignInWithGoogle'
 
 const LoginPage = () => {
   return (
-    <div>
-      <Login />
+    <div className='h-screen'>
+  <SignInWithGoogle />
     </div>
   )
 }

@@ -1,9 +1,18 @@
+import Features from '@/components/company/why-choose-us/Features'
+import WhyChooseUs from '@/components/company/why-choose-us/WhyChooseUs'
 import React from 'react'
 
-const WhyChooseUs = () => {
+const WhyChooseUsPage = () => {
   return (
-    <div>WhyChooseUs</div>
+    <div>
+      <WhyChooseUs />
+
+
+      <hr />
+
+      <Features />
+    </div>
   )
 }
 
-export default WhyChooseUs
+export default WhyChooseUsPage

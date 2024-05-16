@@ -14,7 +14,7 @@ const Home = () => {
                         <Image alt="kazibyte-logo.png" width={60} height={60} src="https://github.com/kazibyte/kazibyte/blob/main/public/kazibyte-.png?raw=true" className="w-44 bg-gray-300 rounded-lg mb-4 shrink-0">
 
                         </Image>
-                        <h1 className="text-xl font-bold">Dr. John Doe</h1>
+                        <h1 className="text-xl font-bold">KaziByte</h1>
                         <p className="text-gray-700">Head of the Department</p>
                         
                     </div>
@@ -28,7 +28,9 @@ const Home = () => {
             </div>
         </div>
         
-    </div>
+      </div>
+      
+      
 </div>
 
   )

@@ -55,6 +55,10 @@ const NavbarMenuData = [
     ]
   },
   {
+      title: 'F&Q',
+    href: '/f&q',
+  },
+  {
     title: 'Login',
     href: '/login',
     sublinks: [
@@ -70,10 +74,11 @@ const NavbarMenuData = [
   }
 ];
 
-
+import icons from '@/assets/images/kazibyte-.png';
 const bodyData = {
   title: 'Kazibyte',
-  body: 'Software Development Company'
+  body: 'Software Development Company',
+  icon: icons,
 }
 
 
@@ -121,7 +126,7 @@ useEffect(() => {
           <div className="flex items-center">
             <div className="flex-shrink-0">
       
-       
+       <Image width={84} height={84} src={bodyData.icon} alt="logo" />
             </div>
            <Link href="/">
                   <h1 className='text-3xl font-bold'>{ bodyData.title }</h1>

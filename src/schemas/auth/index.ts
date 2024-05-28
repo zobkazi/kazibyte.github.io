@@ -5,6 +5,10 @@ export const loginSchema = z.object({
   password: z.string().min(8),
 });
 
+export const loginHistorySchema = z.object({
+  email: z.string().email(),
+});
+
 export const signupSchema = loginSchema;
 
 export const forgotPasswordSchema = z.object({

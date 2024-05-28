@@ -1,74 +1,71 @@
-'use client'
-import { useState } from 'react';
-import Link from 'next/link';
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+import MobileHeaderIcons from "../icons/MobileHeaderIcons";
+import MobileHeaderIconsX from "../icons/MobileHeaderIconsX";
 
 const NavbarMenuData = [
- 
   {
-    title: 'Services',
-    href: '/services',
+    title: "Services",
+    href: "/services",
     sublinks: [
       {
-        title: 'Full-Stack',
-        href: '/services/full-stack',
+        title: "Full-Stack",
+        href: "/services/full-stack",
       },
       {
-        title: 'API Development',
-        href: '/services/api-integration',
+        title: "API Development",
+        href: "/services/api-integration",
       },
       {
-        title: 'Website Development',
-        href: '/services/website-development',
+        title: "Website Development",
+        href: "/services/website-development",
       },
       {
-        title: 'Case Studies',
-        href: '/services/case-studies',
-      }
-    ]
-  },
-   {
-    title: 'Company',
-    href: '/company',
-    sublinks: [
-      {
-        title: 'About-us',
-        href: '/company/about-us',
+        title: "Case Studies",
+        href: "/services/case-studies",
       },
-      {
-        title: 'Blog',
-        href: '/company/blog',
-      },
-      {
-        title: 'Portfolio',
-        href: '/company/portfolio',
-      },
-      {
-        title: 'Why Choose Us',
-        href: '/company/why-choose-us',
-      },
-    ]
+    ],
   },
   {
-    title: 'Login',
-    href: '/login',
+    title: "Company",
+    href: "/company",
     sublinks: [
       {
-        title: 'Login',
-        href: '/login',
+        title: "About-us",
+        href: "/company/about-us",
       },
       {
-        title: 'Register',
-        href: '/register',
+        title: "Blog",
+        href: "/company/blog",
       },
-    ]
-  }
+      {
+        title: "Portfolio",
+        href: "/company/portfolio",
+      },
+      {
+        title: "Why Choose Us",
+        href: "/company/why-choose-us",
+      },
+    ],
+  },
+  {
+    title: "Login",
+    href: "/login",
+    sublinks: [
+      {
+        title: "Login",
+        href: "/login",
+      },
+      {
+        title: "Register",
+        href: "/register",
+      },
+    ],
+  },
 ];
 
-
-
-
 const MobileHeader = () => {
-
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -82,16 +79,23 @@ const MobileHeader = () => {
   return (
     <div className="lg:hidden">
       <div className="flex items-center justify-between px-4 py-2">
-        <button onClick={toggleMenu} className="text-2xl text-blue-300 focus:outline-none">
-        ====
-        </button>
+        <Link
+          href="/"
+          onClick={toggleMenu}
+          className="text-2xl  focus:outline-none"
+        >
+          <MobileHeaderIcons />
+        </Link>
         {isOpen && (
           <div className="absolute top-0 left-0 w-full bg-white shadow-lg">
             <div className="px-4 py-2">
               {NavbarMenuData.map((item, index) => (
                 <div key={index} className="py-2">
                   <Link href={item.href}>
-                    <p onClick={closeMenu} className="text-blue-300 hover:text-blue-600">
+                    <p
+                      onClick={closeMenu}
+                      className="text-blue-300 hover:text-blue-600"
+                    >
                       {item.title}
                     </p>
                   </Link>
@@ -100,7 +104,10 @@ const MobileHeader = () => {
                       {item.sublinks.map((sublink, subIndex) => (
                         <li key={subIndex}>
                           <Link href={sublink.href}>
-                            <p onClick={closeMenu} className="text-blue-300 hover:text-blue-600">
+                            <p
+                              onClick={closeMenu}
+                              className="text-blue-300 hover:text-blue-600"
+                            >
                               {sublink.title}
                             </p>
                           </Link>

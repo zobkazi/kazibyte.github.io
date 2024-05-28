@@ -1,14 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
+import { loginSchema } from "@/schemas/auth";
 
 export async function POST(request: NextRequest, response: NextResponse) {
   try {
-    const reqBody = await request.json();
+    const reqBody = await loginSchema.safeParseAsync(await request.json());
 
-    const { email, password } = reqBody;
     console.log(reqBody);
-    console.log(email, password);
 
-    return NextResponse.json({ email, password });
+    if (!reqBody.success) {
+      return NextResponse.json({ error: reqBody.error }, { status: 400 });
+    }
+
+    re
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 500 });
   }

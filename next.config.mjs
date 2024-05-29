@@ -12,6 +12,18 @@ const nextConfig = {
             }
         ]
     },
+
+    async rewrites() {
+        return [
+            {
+                source: "/api/:path*",
+                destination: "http://localhost:3000/api/:path*",
+            },
+        ];
+    },
+    env: {
+        MONGO_DB_URI: process.env.MONGO_DB_URI
+    }
 };
 
 export default nextConfig;

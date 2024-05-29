@@ -1,130 +1,146 @@
-'use client';
-import React, { useState } from 'react';
-import axios from 'axios';
-import SocialMediaAccounts from './SocialMediaAccounts';
+"use client";
+import React, { useState } from "react";
+import axios from "axios";
+import SocialMediaAccounts from "../register/SocialMediaAccounts";
 
-const RegisterUserFrom = () => {
+const RegisterUserFrom: React.FC = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    roll: '',
-    email: '',
-    password: '',
-    selectedClass: '1',
-    agreeTerms: false,
+    email: "",
+    password: "",
   });
+  const [errors, setErrors] = useState<string[]>([]);
+  const [responseMessage, setResponseMessage] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
-    }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
-
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Validate form data
-    if (!formData.name || !formData.email || !formData.password || !formData.roll || !formData.selectedClass) {
-      alert('Please fill in all fields');
+
+    // Client-side validation
+    const errors: string[] = [];
+    if (!formData.email.trim()) {
+      errors.push("Email is required");
+    }
+    if (!formData.password.trim()) {
+      errors.push("Password is required");
+    }
+
+    if (errors.length > 0) {
+      setErrors(errors);
       return;
     }
 
     try {
       // Post data to API
-      const response = await axios.post('', formData);
-      // Handle success
-    console.log(response);
-
-      console.log(formData)
+      const response = await axios.post("/api/auth/signup", formData);
+      setResponseMessage(response.data.message);
     } catch (error) {
-      // Handle error
-      console.error('Error:', error);
+      setResponseMessage("Error: Unable to login");
     }
   };
 
   const togglePasswordVisibility = () => {
-    setShowPassword(prevState => !prevState);
+    setIsPasswordVisible(!isPasswordVisible);
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
-      <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
-        <div className="mt-12 flex flex-col items-center">
-          <h1 className="text-2xl xl:text-3xl font-extrabold">Sign up</h1>
-          <div className="w-full flex-1 mt-8">
-            <form className="flex flex-col items-center" onSubmit={handleSubmit}>
+    <div className="contain py-16">
+      <div className="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
+        <h2 className="text-2xl uppercase font-medium mb-1">Register</h2>
+        <p className="text-gray-600 mb-6 text-2xl ">
+          Welcome! So good to have you back!
+        </p>
+        <form autoComplete="off" onSubmit={handleSubmit}>
+          {errors.length > 0 && (
+            <div className="text-red-500 text-xl">
+              {errors.map((error, index) => (
+                <p key={index}>{error}</p>
+              ))}
+            </div>
+          )}
+          {responseMessage && (
+            <p className="text-green-500 text-xl">{responseMessage}</p>
+          )}
+          <div className="space-y-2">
+            <div>
+              <label htmlFor="email" className="text-gray-600 mb-2 block">
+                Email address
+              </label>
               <input
-                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                type="text" placeholder="Name" name="name" value={formData.name} onChange={handleChange} />
-
-                
-               <input className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                type="text" placeholder="Roll" name="roll" value={formData.roll} onChange={handleChange} />
-              <input
-                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                type="email" placeholder="Email" name="email" value={formData.email} onChange={handleChange} />
-              <div className="relative w-full">
+                type="email"
+                name="email"
+                id="email"
+                className="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-teal-500 placeholder-gray-400"
+                placeholder="youremail.@domain.com"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <div>
+              <label htmlFor="password" className="text-gray-600 mb-2 block">
+                Password
+              </label>
+              <div className="relative">
                 <input
-                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                  type={showPassword ? "text" : "password"} placeholder="Password" name="password" value={formData.password} onChange={handleChange} />
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-0 flex items-center mr-4 text-gray-600"
+                  type={isPasswordVisible ? "text" : "password"}
+                  name="password"
+                  id="password"
+                  className="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-teal-500 placeholder-gray-400"
+                  placeholder="***********"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+                <div
+                  className="cursor-pointer absolute inset-y-0 right-0 flex items-center px-8 text-gray-600 border-l border-gray-300"
                   onClick={togglePasswordVisibility}
                 >
-                  {showPassword ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                  ) : (
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12a3 3 0 116 0 3 3 0 01-6 0z"></path>
-                    </svg>
-                  )}
-                </button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    className="w-5 h-5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                    ></path>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    ></path>
+                  </svg>
+                </div>
               </div>
-              
-              <select
-                className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                name="selectedClass" value={formData.selectedClass} onChange={handleChange}>
-                <option value="1">Class 1</option>
-                <option value="2">Class 2</option>
-                <option value="3">Class 3</option>
-                <option value="4">Class 4</option>
-                <option value="5">Class 5</option>
-                <option value="6">Class 6</option>
-                <option value="7">Class 7</option>
-                <option value="8">Class 8</option>
-                <option value="9">Class 9</option>
-                <option value="10">Class 10</option>
-
-                {/* Add options for classes 3 to 10 */}
-              </select>
-              <button
-                className="block w-full py-2 mt-3 text-center text-white bg-teal-500 border border-teal-500 rounded hover:bg-transparent hover:text-teal-500 transition uppercase font-roboto font-medium"
-                type="submit">
-                Sign Up
-              </button>
-              <p className="mt-6 text-xs text-gray-600 text-center">
-                <input
-                  type="checkbox" id="agreeTerms" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} />
-                <label htmlFor="agreeTerms" className="ml-2">
-                  I agree to abide by templatanas
-                  <a href="#" className="border-b border-gray-500 border-dotted">Terms of Service</a>
-                  and its
-                  <a href="#" className="border-b border-gray-500 border-dotted">Privacy Policy</a>
-                </label>
-              </p>
-            </form>
-            <SocialMediaAccounts />
+            </div>
           </div>
-
-        </div>
-        
+          <div className="mt-4">
+            <button
+              type="submit"
+              className="block w-full py-2 text-center text-white bg-teal-500 border border-teal-500 rounded hover:bg-transparent hover:text-teal-500 transition uppercase font-roboto font-medium"
+            >
+              Login
+            </button>
+            <div className="flex gap-2 pt-5">
+              <p className="text-gray-600 text-sm">Dont have an account?</p>
+              <a className="text-gray-600 text-xl underline" href="/register">
+                Login here
+              </a>
+            </div>
+          </div>
+        </form>
+        <SocialMediaAccounts />
       </div>
     </div>
   );

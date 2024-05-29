@@ -1,5 +1,3 @@
-import { NextRequest, NextResponse } from "next/server";
+import handleSignup from "@/controllers/auth/handleSignup";
 
-export async function GET(request: NextRequest, response: NextResponse) {
-  return NextResponse.json({ message: "hello sIGNUP" });
-}
+export const POST = handleSignup;

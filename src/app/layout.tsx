@@ -5,6 +5,7 @@ import Footer from "@/components/footer/Footer";
 import Header from "@/components/headers/Header";
 import {keywordData} from '@/config/keywords/Keywords.json'
 import {ThemeProvider} from '@/components/themes/ThemeProvider'
+import Navbar from "@/components/headers/Navbar";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -41,6 +42,8 @@ export default function RootLayout({
      
         <div className="">
           <Header />
+
+          <Navbar />
        
           {children}
 
